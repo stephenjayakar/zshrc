@@ -51,8 +51,6 @@ function cgif {
 	ffmpeg -i "$1" -vf scale=800:-1 -pix_fmt rgb24 -r 30 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
 }
 
-alias merge-master="g c master && g pl && g c - && g merge master"
-
 export JAVA_HOME="/usr/local/opt/openjdk/bin/java"
 
 export NVM_DIR="$HOME/.nvm"
