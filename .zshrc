@@ -14,6 +14,7 @@ plugins=(
     git
     osx
     emacs
+	wd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -38,10 +39,19 @@ alias pip="pip3"
 alias d='devenv'
 alias kp='kill $(lsof -t -i:$1)'
 alias g='git'
+alias stopwatch='~/programming/watch/watch.py'
+alias gmm="g c master && g pl && g c - && g merge master"
+alias jq="jq -R 'fromjson?'"
 
 function acp {
     g a -u && g cm $1 && g p
 }
+
+function cgif {
+	ffmpeg -i "$1" -vf scale=800:-1 -pix_fmt rgb24 -r 30 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
+}
+
+alias merge-master="g c master && g pl && g c - && g merge master"
 
 export JAVA_HOME="/usr/local/opt/openjdk/bin/java"
 
@@ -51,9 +61,10 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH=$(pyenv root)/shims:$PATH
 
 # import plaid config if it exists
-test -r "./.plaid_zshrc" && source "./.plaid_zshrc"
+test -r "$HOME/.plaid_zshrc" && source "$HOME/.plaid_zshrc"
 
 # .gitconfig aliases
 # [alias]
@@ -68,3 +79,4 @@ test -r "./.plaid_zshrc" && source "./.plaid_zshrc"
 # 	r = rebase
 # 	b = branch
 
+export PATH="/usr/local/opt/ruby/bin:$PATH"
