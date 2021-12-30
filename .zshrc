@@ -23,6 +23,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+# Needed for SDL2 to work correctly
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/Library/Frameworks"
 
 # Setting PATH for Python 3.5
 # The original version is saved in .bash_profile.pysave
