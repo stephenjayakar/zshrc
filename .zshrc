@@ -8,7 +8,7 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 # git prompt
 # https://stackoverflow.com/questions/1128496/to-get-a-prompt-which-indicates-git-branch-in-zsh
@@ -34,9 +34,9 @@ RPROMPT=$'$(vcs_info_wrapper)'
 
 plugins=(
     git
-    osx
+    macos
     emacs
-	wd
+    wd
 )
 
 source $ZSH/oh-my-zsh.sh
