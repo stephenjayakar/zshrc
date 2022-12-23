@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
@@ -9,6 +9,28 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
+
+# git prompt
+# https://stackoverflow.com/questions/1128496/to-get-a-prompt-which-indicates-git-branch-in-zsh
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+# or use pre_cmd, see man zshcontrib
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+RPROMPT=$'$(vcs_info_wrapper)'
+#    sj-fishfish 
 
 plugins=(
     git
@@ -42,7 +64,7 @@ alias d='devenv'
 alias kp='kill $(lsof -t -i:$1)'
 alias g='git'
 alias stopwatch='~/programming/watch/watch.py'
-alias gmm="g c master && g pl && g c - && g merge master"
+alias gmm="g c master && g pl && g c - && g merge master --commit --no-edit"
 alias jq="jq -R 'fromjson?'"
 
 function acp {
@@ -80,3 +102,10 @@ test -r "$HOME/.plaid_zshrc" && source "$HOME/.plaid_zshrc"
 # 	b = branch
 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# binaries I write / use
+export PATH="$HOME/usr_bin:$PATH"
+
+export GIT_EXTERNAL_DIFF=difft
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
