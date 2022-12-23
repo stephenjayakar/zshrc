@@ -22,6 +22,7 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git cvs svn
 
+autoload -U colors && colors
 # or use pre_cmd, see man zshcontrib
 vcs_info_wrapper() {
   vcs_info
@@ -29,13 +30,11 @@ vcs_info_wrapper() {
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
   fi
 }
-RPROMPT=$'$(vcs_info_wrapper)'
-#    sj-fishfish 
+PROMPT=$'%F{214}%K{000}[%n]:%1~ $(vcs_info_wrapper)> '
 
 plugins=(
     git
     macos
-    emacs
     wd
 )
 
@@ -107,5 +106,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/usr_bin:$PATH"
 
 export GIT_EXTERNAL_DIFF=difft
+
+alias e='emacsclient --no-wait'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
