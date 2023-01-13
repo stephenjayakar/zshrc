@@ -29,7 +29,7 @@ vcs_info_wrapper() {
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
   fi
 }
-PROMPT=$'%F{214}%K{000}[%n]:%1~ $(vcs_info_wrapper)> '
+PROMPT=$'%F{214}%K{000}[%n]:%1~ $(vcs_info_wrapper)%{$reset_color%}$del> '
 
 plugins=(
     git
