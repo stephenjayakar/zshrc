@@ -62,12 +62,24 @@ alias d='devenv'
 alias kp='kill $(lsof -t -i:$1)'
 alias g='git'
 alias stopwatch='~/programming/watch/watch.py'
-alias gmm="g c master && g pl && g c - && g merge master --commit --no-edit"
+# alias gmm="g c master && g pl && g c - && g merge master --commit --no-edit"
+# trying out a simpler one
+alias gmm="g pl origin master --no-edit"
 alias jq="jq -R 'fromjson?'"
 
 function acp {
     g a -u && g cm $1 && g p
 }
+
+function aacp {
+    g a -u && aicommits
+}
+
+function racp {
+    random_string=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c10)
+    g a -u && g cm $random_string && g p
+}
+
 
 function cgif {
 	ffmpeg -i "$1" -vf scale=800:-1 -pix_fmt rgb24 -r 30 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
@@ -98,14 +110,20 @@ test -r "$HOME/.plaid_zshrc" && source "$HOME/.plaid_zshrc"
 # 	cl = clone
 # 	r = rebase
 # 	b = branch
+#   pluck = restore --source
+#   pb = branch --show-current
 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # binaries I write / use
 export PATH="$HOME/usr_bin:$PATH"
 
-export GIT_EXTERNAL_DIFF=difft
-
-alias e='emacsclient --no-wait'
+alias e='emacsclient -c'
+alias es='emacs --daemon && emacsclient -c .&'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pnpm
+export PNPM_HOME="/Users/sjayakar/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
