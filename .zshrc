@@ -67,6 +67,10 @@ alias stopwatch='~/programming/watch/watch.py'
 alias gmm="g pl origin master --no-edit"
 alias jq="jq -R 'fromjson?'"
 
+function ac {
+    g a -u && g cm $1
+}
+
 function acp {
     g a -u && g cm $1 && g p
 }
