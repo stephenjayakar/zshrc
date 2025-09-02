@@ -59,13 +59,21 @@ alias ls='ls -GFh'
 alias py3="python3"
 alias pip="pip3"
 alias d='devenv'
-alias kp='kill $(lsof -t -i:$1)'
 alias g='git'
 alias stopwatch='~/programming/watch/watch.py'
 # alias gmm="g c master && g pl && g c - && g merge master --commit --no-edit"
 # trying out a simpler one
 alias gmm="g pl origin master --no-edit"
 alias jq="jq -R 'fromjson?'"
+
+function kp() {
+    pid=$(lsof -t -i:$1)
+    if [ -n "$pid" ]; then
+        kill "$pid"
+    else
+        echo "No process found on port $1"
+    fi
+}
 
 function ac {
     g a -u && g cm $1
